@@ -18,10 +18,17 @@ void drawGameScreen() {
 
 void drawBall() {
   // Display Ball in correct position
+  background(bgColor);
+  fill(ballColor);
+  ellipse(width/2, height/2,ballWidth,ballHeight);
 }
 
 void drawPaddles() {
   // Display Left and Right paddles in correct position
+  fill(paddleColor);
+  rect(0,leftPaddle,paddleWidth,paddleLength);
+  fill(paddleColor);
+  rect(displayWidth-paddleWidth,rightPaddle,paddleWidth,paddleLength);
 }
 
 void resetGame(){
