@@ -6,11 +6,20 @@ void setup() {
 
 void draw() {
   drawGameScreen();
+  drawBall();
+  drawPaddles();
+  rightLose();
+  leftLose();
+  displayScores();
+  resetGame();
+  
 }
 
 void drawGameScreen() {
-  // Draw background
-  // Update Ball Velocity and Resolve Collisions
+  background(bgColor);// Draw background
+   updateBallPosition();
+   updateBallVelocity();
+   updatePaddlePositions(); // Update Ball Velocity and Resolve Collisions
   // Update Ball and Paddle Positions
   // Draw Ball and Paddles
   // Display Scores
@@ -20,7 +29,7 @@ void drawBall() {
   // Display Ball in correct position
   background(bgColor);
   fill(ballColor);
-  ellipse(width/2, height/2,ballWidth,ballHeight);
+  ellipse(ballX, ballY,ballWidth,ballHeight);
 }
 
 void drawPaddles() {
@@ -32,10 +41,17 @@ void drawPaddles() {
 }
 
 void resetGame(){
-  // Reset Ball and Paddle Positions
+  if(reset||(ballX>displayWidth-ballRadius)||(ballX<ballRadius)) {
+  drawGameScreen();
+  ballX=displayWidth/2;
+  ballY=displayHeight/2;
+  drawBall();// Reset Ball and Paddle Positions
+  drawPaddles();
   // Reset Ball Velocity
+}
 }
 
 void displayScores() {
-  // Display Left and Right player Scores
+  text(leftScore,100,550);
+  text(rightScore,550,550);// Display Left and Right player Scores
 }
