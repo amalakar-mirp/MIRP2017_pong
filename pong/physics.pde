@@ -7,14 +7,37 @@ void updateBallVelocity() {
   ballY=ballRadius;
   ballVy *= -restitutionCoeff;
   }
-  if(ballX>displayWidth-(paddleWidth+ballRadius)&&((ballY>=rightPaddle)&&(ballY<=rightPaddle+paddleLength))) {
+  if(ballX>displayWidth-(paddleWidth+ballRadius)&&((ballY>=rightPaddle)&&(ballY<=buffer+rightPaddle))) {
   ballX=displayWidth-(paddleWidth+ballRadius);
   ballVx *= -restitutionCoeff;
+  ballVy=BALL_VELOCITY*(ballY-(rightPaddle+buffer))/buffer;
   }
-  if(ballX<ballRadius+paddleWidth&&ballY>=leftPaddle&&ballY<=leftPaddle+paddleLength) {
+  if(ballX>displayWidth-(paddleWidth+ballRadius)&&((ballY>=buffer+rightPaddle)&&(ballY<=rightPaddle+paddleLength))) {
+  ballX=displayWidth-(paddleWidth+ballRadius);
+  ballVx *= -restitutionCoeff;
+  ballVy=BALL_VELOCITY*(ballY-(rightPaddle+buffer))/buffer;
+  }
+  if(ballX>displayWidth-(paddleWidth+ballRadius)&&(ballY==rightPaddle+buffer)) {
+  ballX=displayWidth-(paddleWidth+ballRadius);
+  ballVx *= -restitutionCoeff;
+  ballVy=0;
+  }
+  if(ballX<ballRadius+paddleWidth&&ballY>leftPaddle&&ballY<=leftPaddle+buffer) {
   ballX=ballRadius+paddleWidth;
   ballVx *= -restitutionCoeff;
+  ballVy=BALL_VELOCITY*(ballY-(leftPaddle+buffer))/buffer;
   }
+  if(ballX<ballRadius+paddleWidth&&ballY>=leftPaddle+buffer&&ballY<=leftPaddle+paddleLength) {
+  ballX=ballRadius+paddleWidth;
+  ballVx *= -restitutionCoeff;
+  ballVy=BALL_VELOCITY*(ballY-(leftPaddle+buffer))/buffer;
+  }
+   if(ballX<ballRadius+paddleWidth&&(ballY==leftPaddle+buffer)) {
+  ballX=ballRadius+paddleWidth;
+  ballVx *= -restitutionCoeff;
+  ballVy=0;
+  }
+  
   // Detect Ball collisions with walls or paddles
   // If collide with paddle, or top/bottom wall, then bounce off
   // If collides with left wall, right player gains one point

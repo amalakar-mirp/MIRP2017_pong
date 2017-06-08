@@ -1,18 +1,19 @@
 void setup() {
   size(displayWidth, displayHeight);
   resetGame();
+  startScreen();
   textFont(createFont("Arial Bold", 50));
 }
 
 void draw() {
+  startScreen();
   drawGameScreen();
   drawBall();
   drawPaddles();
   rightLose();
   leftLose();
   displayScores();
-  resetGame();
-  
+  resetGame();  
 }
 
 void drawGameScreen() {
@@ -47,6 +48,7 @@ void resetGame(){
   ballY=displayHeight/2;
   drawBall();// Reset Ball and Paddle Positions
   drawPaddles();
+  delay(800);
   // Reset Ball Velocity
 }
 }
@@ -54,4 +56,16 @@ void resetGame(){
 void displayScores() {
   text(leftScore,100,550);
   text(rightScore,550,550);// Display Left and Right player Scores
+}
+
+void startScreen() {
+if(start)
+gameState=1;
+if( gameState==1) {
+background(189);
+fill(58,130,180);
+text("Pong",displayWidth/2,displayHeight/2);
+}
+if(gameState==0)
+draw();
 }
